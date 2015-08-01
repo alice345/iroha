@@ -32,8 +32,8 @@ EOS
   end
 end
 
-file = ARGV[0]
+file = File.open(ARGV[0], mode = "rb")
 chunk = HeaderChunk.new(file)
 common = CommonChunk.new(chunk)
-common.to_s
+puts common.to_s
 file.close
