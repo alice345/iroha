@@ -14,11 +14,11 @@ class CommonChunk
 
   def initialize(chunk)
     @id = chunk.data.slice(0,4)
-    @common_size = chunk.data.slice(0,4).unpack('N')[0].to_i
-    @num_channels = chunk.data.slice(0,2).unpack('n')[0].to_i
-    @num_sample_frames = chunk.data.slice(0,4).unpack('N')[0].to_i
-    @sample_size = chunk.data.slice(0,2).unpack('n')[0].to_i 
-    @sample_rate = chunk.data.slice(3,10).unpack('n')[0].to_i
+    @common_size = chunk.data.slice(4,4).unpack('N')[0].to_i
+    @num_channels = chunk.data.slice(8,2).unpack('n')[0].to_i
+    @num_sample_frames = chunk.data.slice(10,4).unpack('N')[0].to_i
+    @sample_size = chunk.data.slice(14,2).unpack('n')[0].to_i 
+    @sample_rate = chunk.data.slice(18,8).unpack('n')[0].to_i
   end
 
   def to_s
