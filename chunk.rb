@@ -42,14 +42,14 @@ EOS
 end
 
 class SoundDataChunk
-  attr_accessor(:id, :size, :offset, :block_size, :sound_data)
+  attr_accessor(:id, :size, :offset, :block_size, :data)
 
   def initialize(chunk)
     @id = chunk.sound.slice(0,4)
     @size = chunk.sound.slice(4,4).unpack('N')[0].to_i
     @offset = chunk.sound.slice(8,4).unpack('n')[0].to_i
     @block_size = chunk.sound.slice(12,4).unpack('n')[0].to_i
-    @sound_data = chunk.sound.slice(16,@size)
+    @data = chunk.sound.slice(16,@size)
   end
 
   def to_s
