@@ -11,7 +11,7 @@ sound_chunk = SoundDataChunk.new(chunk)
 puts chunk.to_s, common.to_s, sound_chunk.to_s
 
 common.num_sample_frames.times do |frame|
-  sound = sound_chunk.data.slice(frame*4-4,2).unpack("s*")[0].to_f
+  sound = sound_chunk.data.slice(frame*4-4,2).unpack("c*")[0].to_f
   csv << [frame.to_f/common.sample_rate, sound]
 end
 
