@@ -49,7 +49,7 @@ class SoundDataChunk
     @size = chunk.sound.slice(4,4).unpack('N')[0].to_i
     @offset = chunk.sound.slice(8,4).unpack('n')[0].to_i
     @block_size = chunk.sound.slice(12,4).unpack('n')[0].to_i
-    @sound_data = chunk.sound.slice(16,@size-8)
+    @sound_data = chunk.sound.slice(16,@size)
   end
 
   def to_s
@@ -61,12 +61,3 @@ BlockSize:        #{@block_size}
 EOS
   end
 end
-
-file = File.open(ARGV[0], mode = "rb")
-chunk = FormAiffChunk.new(file)
-common = CommonChunk.new(chunk)
-sound = SoundDataChunk.new(chunk)
-
-puts chunk.to_s, common.to_s, sound.to_s
-
-file.close
