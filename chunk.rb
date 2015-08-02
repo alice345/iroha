@@ -1,11 +1,12 @@
-class HeaderChunk
-  attr_accessor(:name, :size, :data)
+class FormAiffChunk
+  attr_accessor(:id, :size, :form_type, :common, :sound)
 
   def initialize(file)
-    @name = file.read(4)
+    @id= file.read(4)
     @size = file.read(4).unpack('N')[0].to_i
     @form_type = file.read(4)
-    @data = file.read(@size)
+    @common = file.read(26)
+    @sound = file.read(@size - 26)
   end
 end
 
