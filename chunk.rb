@@ -28,7 +28,28 @@ ChunkID:         #{@id}
 Channels:        #{@num_channels}
 NumSampleFrames: #{@num_sample_frames}
 SampleSize:      #{@sample_size}
-SampleRate:      #{@sample_rate}
+SampleRate:      #{@sample_rate}[Hz]
+EOS
+  end
+end
+
+class SoundDataChunk
+  attr_accessor(:id, :size, :offset, :block_size, :sound_data)
+
+  def initialize(chunk)
+    @id = chunk.sound.slice(0,4)
+    @size = chunk.sound.slice(4,4).unpack('N')[0].to_i
+    @offset = chunk.sound.slice(8,4).unpack('n')[0].to_i
+    @block_size = chunk.sound.slice(12,4).unpack('n')[0].to_i
+    @sound_data = chunk.sound.slice(16,@size-8)
+  end
+
+  def to_s
+    <<EOS
+SoundDataChunkID: #{@id}
+Size:             #{@size}
+Offset:           #{@offset}
+BlockSize:        #{@block_size}
 EOS
   end
 end
