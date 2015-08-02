@@ -8,6 +8,14 @@ class FormAiffChunk
     @common = file.read(26)
     @sound = file.read(@size - 26)
   end
+
+  def to_s
+    <<EOS
+FormAiffChunkID: #{@id}
+Size:            #{@size}
+FormType:        #{@form_type}
+EOS
+  end
 end
 
 class CommonChunk
