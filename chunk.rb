@@ -32,7 +32,7 @@ class CommonChunk
 
   def to_s
     <<EOS
-ChunkID:         #{@id}
+CommonChunkID:   #{@id}
 Channels:        #{@num_channels}
 NumSampleFrames: #{@num_sample_frames}
 SampleSize:      #{@sample_size}
@@ -63,7 +63,10 @@ EOS
 end
 
 file = File.open(ARGV[0], mode = "rb")
-chunk = HeaderChunk.new(file)
+chunk = FormAiffChunk.new(file)
 common = CommonChunk.new(chunk)
-puts common.to_s
+sound = SoundDataChunk.new(chunk)
+
+puts chunk.to_s, common.to_s, sound.to_s
+
 file.close
