@@ -14,12 +14,12 @@ class CommonChunk
   attr_accessor(:id, :common_size, :num_channels, :num_sample_frames, :sample_size, :sample_rate)
 
   def initialize(chunk)
-    @id = chunk.data.slice(0,4)
-    @common_size = chunk.data.slice(4,4).unpack('N')[0].to_i
-    @num_channels = chunk.data.slice(8,2).unpack('n')[0].to_i
-    @num_sample_frames = chunk.data.slice(10,4).unpack('N')[0].to_i
-    @sample_size = chunk.data.slice(14,2).unpack('n')[0].to_i 
-    @sample_rate = chunk.data.slice(18,8).unpack('n')[0].to_i
+    @id = chunk.common.slice(0,4)
+    @common_size = chunk.common.slice(4,4).unpack('N')[0].to_i
+    @num_channels = chunk.common.slice(8,2).unpack('n')[0].to_i
+    @num_sample_frames = chunk.common.slice(10,4).unpack('N')[0].to_i
+    @sample_size = chunk.common.slice(14,2).unpack('n')[0].to_i 
+    @sample_rate = chunk.common.slice(18,8).unpack('n')[0].to_i
   end
 
   def to_s
